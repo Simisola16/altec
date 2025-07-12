@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olamilekan Muhayad | Full Stack Developer | Altec</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --secondary: #10B981;
+            --accent: #F59E0B;
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, #4F46E5, #EC4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .skill-bar {
+            transition: width 1s ease-in-out;
+        }
+
+        .project-card {
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border-color: rgba(79, 70, 229, 0.3);
+        }
+
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tech-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tech-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            width: 50%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 40px;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 40px;
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: -10px;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: -10px;
+            width: 20px;
+            height: 20px;
+            background: var(--secondary);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 0;
+                text-align: left;
+            }
+            
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                left: 0;
+                padding-right: 0;
+                padding-left: 70px;
+                text-align: left;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-content::after,
+            .timeline-item:nth-child(even) .timeline-content::after {
+                left: 20px;
+                top: -30px;
+                right: auto;
+            }
+        }
+
+        .altec-badge {
+            background: linear-gradient(45deg, #4F46E5, #10B981);
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+
+        .altec-logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #4F46E5, #10B981);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans">
+
+     <!-- Navigation -->
+    <nav class="fixed w-full bg-gray-800/90 backdrop-blur-sm z-50 border-b border-gray-700">
+        <div class="container mx-auto px-4 sm:px-6 py-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-xl font-bold gradient-text">OLAMILEKAN.M</h1>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#about" class="hover:text-indigo-400 transition font-medium">About</a>
+                    <a href="#skills" class="hover:text-indigo-400 transition font-medium">Skills</a>
+                    <a href="#projects" class="hover:text-indigo-400 transition font-medium">Projects</a>
+                    <a href="#experience" class="hover:text-indigo-400 transition font-medium">Experience</a>
+                    <a href="#contact" class="hover:text-indigo-400 transition font-medium">Contact</a>
+                </div>
+
+                <button class="md:hidden text-gray-300 hover:text-indigo-400" id="mobileMenuButton">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-16 6h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="mobile-menu absolute w-full bg-gray-800 md:hidden" id="mobileMenu">
+            <div class="container mx-auto px-4 py-4 flex flex-col space-y-4 border-t border-gray-700">
+                <a href="#about" class="hover:text-indigo-400 transition font-medium">About</a>
+                <a href="#skills" class="hover:text-indigo-400 transition font-medium">Skills</a>
+                <a href="#projects" class="hover:text-indigo-400 transition font-medium">Projects</a>
+                <a href="#experience" class="hover:text-indigo-400 transition font-medium">Experience</a>
+                <a href="#contact" class="hover:text-indigo-400 transition font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="about" class="min-h-screen flex items-center pt-20">
+        <div class="container mx-auto px-4 sm:px-6 text-center">
+            <div class="animate-float mb-8 md:mb-12">
+                <div class="text-center">
+                    <div class="altec-logo">
+                        ALTEC
+                    </div>
+                    <div class="text-indigo-300 text-sm">Business Solutions</div>
+                </div>
+            </div>
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-indigo-400 to-emerald-400 bg-clip-text text-transparent">
+                Olamilekan Muhayad
+            </h1>
+            <div class="text-lg md:text-xl font-medium mb-2 text-indigo-300">
+                Full-Stack Developer & UI/UX Designer
+            </div>
+            <p class="text-lg md:text-xl text-gray-400 mb-6 md:mb-8 max-w-2xl mx-auto px-4">
+                Founder of <strong class="text-emerald-300">Altec</strong> - Innovative developer specializing in building performant web applications with modern technologies. 
+                Transforming ideas into elegant solutions since 2020.
+            </p>
+            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4 px-4">
+                <a href="#contact" class="bg-indigo-600 hover:bg-indigo-700 px-6 py-3 md:px-8 md:py-3 rounded-lg font-medium transition shadow-lg hover:shadow-indigo-500/20">
+                    Hire Me
+                </a>
+            </div>
+            <div class="mt-10 md:mt-14 text-gray-400 flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-6">
+                <span id="visitorCount" class="flex items-center">
+                    <i class="fas fa-users mr-2 text-indigo-400"></i>Loading visitors...
+                </span>
+                <span class="flex items-center">
+                    <i class="fas fa-map-marker-alt mr-2 text-emerald-400"></i>Iwo, Nigeria
+                </span>
+                <span class="flex items-center">
+                    <i class="fas fa-calendar-alt mr-2 text-amber-400"></i>5+ projects completed
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Expertise -->
+    <section id="skills" class="py-16 md:py-20 bg-gray-800/50">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center animate-on-scroll section-title">
+                Technical Expertise
+            </h2>
+            
+            <div class="tech-stack mb-12 md:mb-16">
+                <div class="tech-item animate-on-scroll">
+                    <i class="fab fa-react text-4xl mb-4 text-blue-400"></i>
+                    <h3 class="font-semibold">React</h3>
+                    <p class="text-sm text-gray-400 mt-2">Frontend Development</p>
+                </div>
+
+                <div class="tech-item animate-on-scroll">
+                    <i class="fas fa-server text-4xl mb-4 text-green-400"></i>
+                    <h3 class="font-semibold">Node.js</h3>
+                    <p class="text-sm text-gray-400 mt-2">Backend Services</p>
+                </div>
+
+                <div class="tech-item animate-on-scroll">
+                    <i class="fas fa-database text-4xl mb-4 text-yellow-400"></i>
+                    <h3 class="font-semibold">Firebase</h3>
+                    <p class="text-sm text-gray-400 mt-2">Database & Auth</p>
+                </div>
+
+                <div class="tech-item animate-on-scroll">
+                    <i class="fab fa-aws text-4xl mb-4 text-orange-400"></i>
+                    <h3 class="font-semibold">AWS</h3>
+                    <p class="text-sm text-gray-400 mt-2">Cloud Services</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                <div class="bg-gray-700/50 p-6 rounded-lg animate-on-scroll border border-gray-600">
+                    <h3 class="text-lg md:text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-laptop-code mr-3 text-indigo-400"></i>Frontend Development
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm md:text-base mb-2">
+                                <span class="flex items-center"><i class="fab fa-react mr-2 text-blue-400"></i>React</span>
+                                <span>92%</span>
+                            </div>
+                            <div class="h-2 bg-gray-600 rounded-full">
+                                <div class="skill-bar h-2 bg-indigo-400 rounded-full" data-level="92%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm md:text-base mb-2">
+                                <span class="flex items-center"><i class="fab fa-html5 mr-2 text-orange-500"></i>HTML5/CSS3</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="h-2 bg-gray-600 rounded-full">
+                                <div class="skill-bar h-2 bg-indigo-400 rounded-full" data-level="95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm md:text-base mb-2">
+                                <span class="flex items-center"><i class="fab fa-js mr-2 text-yellow-400"></i>JavaScript</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="h-2 bg-gray-600 rounded-full">
+                                <div class="skill-bar h-2 bg-indigo-400 rounded-full" data-level="90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-700/50 p-6 rounded-lg animate-on-scroll border border-gray-600">
+                    <h3 class="text-lg md:text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-server mr-3 text-emerald-400"></i>Backend & DevOps
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm md:text-base mb-2">
+                                <span class="flex items-center"><i class="fab fa-node-js mr-2 text-green-500"></i>Node.js</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="h-2 bg-gray-600 rounded-full">
+                                <div class="skill-bar h-2 bg-emerald-400 rounded-full" data-level="85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm md:text-base mb-2">
+                                <span class="flex items-center"><i class="fas fa-database mr-2 text-yellow-400"></i>Firebase</span>
+                                <span>88%</span>
+                            </div>
+                            <div class="h-2 bg-gray-600 rounded-full">
+                                <div class="skill-bar h-2 bg-emerald-400 rounded-full" data-level="88%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm md:text-base mb-2">
+                                <span class="flex items-center"><i class="fab fa-aws mr-2 text-orange-500"></i>AWS</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="h-2 bg-gray-600 rounded-full">
+                                <div class="skill-bar h-2 bg-emerald-400 rounded-full" data-level="80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-16 md:py-20">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center animate-on-scroll section-title">
+                Featured Projects
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <!-- Angel Poms UK Project -->
+                <div class="project-card rounded-xl p-5 animate-on-scroll">
+                    <div class="mb-4">
+                        <div class="text-amber-400 text-3xl mb-3">
+                            <i class="fas fa-dog"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Angel Poms UK</h3>
+                        <p class="text-gray-400 mb-4">Professional website for a Pomeranian breeder in the UK with custom design and booking system</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-indigo-400/10 text-indigo-300 px-2 py-1 rounded text-xs">React</span>
+                            <span class="bg-emerald-400/10 text-emerald-300 px-2 py-1 rounded text-xs">Node.js</span>
+                            <span class="bg-amber-400/10 text-amber-300 px-2 py-1 rounded text-xs">Tailwind CSS</span>
+                        </div>
+                        <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
+                            <a href="https://www.angelpoms.co.uk" 
+                               target="_blank"
+                               class="text-amber-400 hover:text-amber-300 transition font-medium flex items-center">
+                               <i class="fas fa-external-link-alt mr-2"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card rounded-xl p-5 animate-on-scroll">
+                    <div class="mb-4">
+                        <div class="text-indigo-400 text-3xl mb-3">
+                            <i class="fab fa-react"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Competition Platform</h3>
+                        <p class="text-gray-400 mb-4">Full-stack platform with real-time updates and participant management</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-indigo-400/10 text-indigo-300 px-2 py-1 rounded text-xs">React</span>
+                            <span class="bg-emerald-400/10 text-emerald-300 px-2 py-1 rounded text-xs">Firebase</span>
+                            <span class="bg-blue-400/10 text-blue-300 px-2 py-1 rounded text-xs">Tailwind CSS</span>
+                        </div>
+                        <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
+                            <a href="https://princedaudaabimbolacompetition.vercel.app/" 
+                               target="_blank"
+                               class="text-indigo-400 hover:text-indigo-300 transition font-medium flex items-center">
+                               <i class="fas fa-external-link-alt mr-2"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card rounded-xl p-5 animate-on-scroll">
+                    <div class="mb-4">
+                        <div class="text-emerald-400 text-3xl mb-3">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Altec Business Portal</h3>
+                        <p class="text-gray-400 mb-4">Custom business management solution for Altec with analytics dashboard</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-indigo-400/10 text-indigo-300 px-2 py-1 rounded text-xs">React</span>
+                            <span class="bg-emerald-400/10 text-emerald-300 px-2 py-1 rounded text-xs">Firebase</span>
+                            <span class="bg-amber-400/10 text-amber-300 px-2 py-1 rounded text-xs">Node.js</span>
+                        </div>
+                        <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
+                            <a href="#" class="text-emerald-400 hover:text-emerald-300 transition font-medium flex items-center">
+                                <i class="fas fa-lock mr-2"></i> Private Project
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-16 md:py-20 bg-gray-800/50">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center animate-on-scroll section-title">
+                Experience & Education
+            </h2>
+            
+            <div class="timeline">
+                <!-- Experience Item 1 -->
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-content">
+                        <div class="text-indigo-400 text-sm mb-2">2024 - Present</div>
+                        <h3 class="text-lg font-bold mb-2">Founder & Full-Stack Developer</h3>
+                        <div class="altec-badge">Altec</div>
+                        <p class="text-gray-400 mt-2">Leading development of custom solutions for clients and managing business operations.</p>
+                    </div>
+                </div>
+                
+                <!-- Experience Item 2 -->
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-content">
+                        <div class="text-emerald-400 text-sm mb-2">2023 - 2024</div>
+                        <h3 class="text-lg font-bold mb-2">Frontend Developer Intern</h3>
+                        <p class="text-gray-400">Worked on UI components and implemented responsive designs for client projects.</p>
+                    </div>
+                </div>
+                
+                <!-- Education Item -->
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-content">
+                        <div class="text-amber-400 text-sm mb-2">2023 - Present</div>
+                        <h3 class="text-lg font-bold mb-2">Computer Science Student</h3>
+                        <p class="text-gray-400">Currently pursuing advanced studies in computer science and software engineering.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 md:py-20">
+        <div class="container mx-auto px-4 sm:px-6 max-w-2xl">
+            <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center animate-on-scroll section-title">Get in Touch</h2>
+            <div class="bg-gray-800/50 rounded-xl p-6 md:p-8 border border-gray-700 animate-on-scroll">
+                <form id="contactForm" class="space-y-5">
+                    <div>
+                        <label for="name" class="block text-gray-300 mb-2">Your Name</label>
+                        <input type="text" id="name" placeholder="John Doe" 
+                               class="w-full p-3 bg-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 border border-gray-600"
+                               required>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-gray-300 mb-2">Email Address</label>
+                        <input type="email" id="email" placeholder="john@example.com" 
+                               class="w-full p-3 bg-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 border border-gray-600"
+                               required>
+                    </div>
+                    <div>
+                        <label for="message" class="block text-gray-300 mb-2">Your Message</label>
+                        <textarea id="message" rows="5" placeholder="I'd like to discuss a project..." 
+                                  class="w-full p-3 bg-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 border border-gray-600"
+                                  required></textarea>
+                    </div>
+                    <button type="submit" 
+                            class="w-full bg-indigo-600 hover:bg-indigo-700 py-3 rounded-lg font-medium transition mt-2 shadow-lg hover:shadow-indigo-500/20">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+            <div class="mt-12 text-center">
+                <h3 class="text-xl font-semibold mb-6">Connect With Me</h3>
+                <div class="social-links flex justify-center space-x-6">
+                    <a href="https://github.com/simisola16" target="_blank" class="text-gray-400 hover:text-indigo-400 transition transform hover:-translate-y-1">
+                        <i class="fab fa-github fa-2x"></i>
+                    </a>
+                    <a href="https://wa.me/2348085742261" target="_blank" class="text-gray-400 hover:text-emerald-400 transition transform hover:-translate-y-1">
+                        <i class="fab fa-whatsapp fa-2x"></i>
+                    </a>
+                    <a href="mailto:olamilekanmuhayad@yahoo.com" class="text-gray-400 hover:text-red-400 transition transform hover:-translate-y-1">
+                        <i class="fas fa-envelope fa-2x"></i>
+                    </a>
+                    <!-- <a href="#" class="text-gray-400 hover:text-blue-400 transition transform hover:-translate-y-1">
+                        <i class="fab fa-linkedin-in fa-2x"></i>
+                    </a> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-8 border-t border-gray-800">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h1 class="text-xl font-bold gradient-text">OLAMILEKAN.M</h1>
+                    <p class="text-sm text-gray-500 mt-1">Full Stack Developer & Founder of Altec</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#about" class="text-gray-500 hover:text-indigo-400 transition">About</a>
+                    <a href="#skills" class="text-gray-500 hover:text-indigo-400 transition">Skills</a>
+                    <a href="#projects" class="text-gray-500 hover:text-indigo-400 transition">Projects</a>
+                    <a href="#contact" class="text-gray-500 hover:text-indigo-400 transition">Contact</a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-6 pt-6 text-center">
+                <p class="text-sm text-gray-500">
+                    © 2024 Olamilekan Muhayad Olasunkanmi. All rights reserved
+                </p>
+                <p class="text-xs text-gray-600 mt-2">Business Name: Altec</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase Integration -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+        import { getFirestore, collection, addDoc, doc, updateDoc, increment, getDoc } 
+               from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCapAWf28N8nXnRVyx8EQmIW3KE0TWvy94",
+            authDomain: "muhayad-dev.firebaseapp.com",
+            projectId: "muhayad-dev",
+            storageBucket: "muhayad-dev.appspot.com",
+            messagingSenderId: "128482851106",
+            appId: "1:128482851106:web:8e341af7387cad03580d7b",
+            measurementId: "G-CTJWKS1EDE"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getFirestore(app);
+
+        async function updateVisitorCount() {
+            const counterRef = doc(db, "analytics", "visitorCount");
+            await updateDoc(counterRef, {
+                count: increment(1)
+            });
+            const docSnap = await getDoc(counterRef);
+            document.getElementById('visitorCount').innerHTML = `<i class="fas fa-users mr-2 text-indigo-400"></i> ${docSnap.data().count} visitors`;
+        }
+
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value,
+                timestamp: new Date()
+            };
+
+            try {
+                await addDoc(collection(db, "contacts"), formData);
+                showToast('Message sent successfully!');
+                logEvent(analytics, 'contact_form_submit');
+                document.getElementById('contactForm').reset();
+            } catch (error) {
+                showToast('Error sending message', true);
+                console.error("Error:", error);
+            }
+        });
+
+        function animateSkillBars() {
+            document.querySelectorAll('.skill-bar').forEach(bar => {
+                bar.style.width = bar.dataset.level;
+            });
+        }
+
+        function showToast(message, isError = false) {
+            const toast = document.createElement('div');
+            toast.className = `fixed bottom-4 right-4 p-4 rounded-lg ${isError ? 'bg-red-500' : 'bg-green-500'} text-white`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            updateVisitorCount();
+            animateSkillBars();
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fadeIn');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+        });
+    </script>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        document.getElementById('mobileMenuButton').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+        });
+
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuButton = document.getElementById('mobileMenuButton');
+            
+            if (!menuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
